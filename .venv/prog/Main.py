@@ -1,32 +1,31 @@
-#!/usr/bin/env python3
+import os
+import socket
 
 def repl():
-    vfs_name = "VFS"  # имя виртуальной файловой системы
+    name = os.getenv("USER")
+    host_name = socket.gethostname()
     while True:
         try:
-            # приглашение
-            user_input = input(f"[{vfs_name}]$ ").strip()
+            user_input = input(f"{name}@{host_name}:~ $ ").strip()
 
-            if not user_input:  # пустой ввод — пропускаем
+            if not user_input:
                 continue
 
-            # разбор ввода на команду и аргументы
             parts = user_input.split()
             cmd, *args = parts
 
-            # обработка команд
             if cmd == "exit":
-                print("Выход из эмулятора...")
+                print("bye bye...")
                 break
             elif cmd == "ls":
-                print(f"Выполнена команда: {cmd}, аргументы: {args}")
+                print(f"cd\nexit\nls\n")
             elif cmd == "cd":
-                print(f"Выполнена команда: {cmd}, аргументы: {args}")
+                print(f"still empty comm...")
             else:
-                print(f"Ошибка: неизвестная команда '{cmd}'")
+                print(f"Error: no such comm '{cmd}'")
 
         except (EOFError, KeyboardInterrupt):
-            print("\nВыход из эмулятора...")
+            print("\n...")
             break
 
 
