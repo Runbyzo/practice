@@ -1,12 +1,16 @@
 import os
 import socket
+import zipfile
+from zipfile import *
+## VFS name
+zipPath = ""
+with zipfile.ZipFile(zipPath, "r") as zip_ref:
+    fileList = zip_ref.filename
 
 def repl():
-    name = os.getenv("USER")
-    host_name = socket.gethostname()
     while True:
         try:
-            user_input = input(f"{name}@{host_name}:~ $ ").strip()
+            user_input = input(f"{fileList} > ").strip()
 
             if not user_input:
                 continue
